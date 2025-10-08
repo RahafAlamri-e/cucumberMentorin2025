@@ -54,12 +54,56 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.5.4</version>
                 <configuration>
+                    <!-- Parallel execution mode -->
+                    <parallel>methods</parallel>
+                    <threadCount>3</threadCount>
+
+                    <!-- Fork settings - NEW METHOD -->
+                    <forkCount>1</forkCount>
+                    <reuseForks>false</reuseForks>
+
+                    <!-- Combine argLines - IMPORTANT! -->
+                    <argLine>
+                        -Duser.language=en
+                        -Xmx1024m
+                        -Dfile.encoding=UTF-8
+                    </argLine>
+
+                    <useFile>false</useFile>
                     <includes>
                         <include>**/Runner.java</include>
                     </includes>
+                    <testFailureIgnore>true</testFailureIgnore>
                 </configuration>
+            </plugin>
+
+            <!-- plugin for colourful Cucumber Reports -->
+            <plugin>
+                <groupId>net.masterthought</groupId>
+                <artifactId>maven-cucumber-reporting</artifactId>
+                <version>5.7.7</version>
+                <executions>
+                    <execution>
+                        <id>execution</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <projectName>Sda Software Testing 2025</projectName>
+                            <skip>false</skip>
+                            <outputDirectory>${project.build.directory}/cucumber-reports</outputDirectory>
+                            <inputDirectory>${project.build.directory}/cucumber-reports</inputDirectory>
+                            <jsonFiles>
+                                <param>**/*.json</param>
+                            </jsonFiles>
+                            <mergeFeaturesById>false</mergeFeaturesById>
+                            <mergeFeaturesWithRetest>false</mergeFeaturesWithRetest>
+                            <checkBuildResult>false</checkBuildResult>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
-
 </project>

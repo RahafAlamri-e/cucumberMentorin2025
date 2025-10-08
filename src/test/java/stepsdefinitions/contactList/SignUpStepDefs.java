@@ -18,15 +18,15 @@ public class SignUpStepDefs {
     }
     @When("user clicks on Sign Up button")
     public void user_clicks_on_sign_up_button() {
-    homePage.clickSignUp();
+        homePage.clickSignUp();
     }
     @When("User fills sign up form")
     public void user_fills_sign_up_form() {
 
-    signUpPage.signUp("John12"
-            ,"Doe12"
-            ,"Johndoe12@new.com"
-            ,"123asd?");
+        signUpPage.signUp("John12"
+                ,"Doe12"
+                ,"Johndoe12@new.com"
+                ,"123asd?");
     }
     @Then("user verifies user is signed up")
     public void user_verifies_user_is_signed_up() {
@@ -38,7 +38,7 @@ public class SignUpStepDefs {
     }
 
     @And("user closes driver")
-    public void userClosesDriver() {
+    public void userClosesDriver() throws InterruptedException {
         Driver.quitDriver();
     }
 
